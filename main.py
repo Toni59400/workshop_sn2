@@ -1,11 +1,12 @@
-import pygame
+import classGame
+
 pygame.init()
 
 # générer la fenêtre de notre jeu
 pygame.display.set_caption("WorkShop2023")
 screen = pygame.display.set_mode((1280, 720))
 jeu = True
-game = GamePingpong(screen, 3)
+game = Game(screen, 3)
 
 while jeu:
     pygame.display.flip()
