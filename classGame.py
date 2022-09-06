@@ -14,12 +14,18 @@ class Game:
         self.spectateur = Spectateur(self, self.screen, self.pixel)
         self.presentateur = Presentateur(self, self.screen, self.pixel)
         self.ecran = Ecran(self, self.screen, self.pixel)
+        self.__zoom = 30 #entre 0 et 100
+        self.spectateur.zoom(30)
         #exemple son
         #self.soundEnd = pygame.mixer.Sound("jeuPingPong/assets/sound/applaudissements.mp3")
 
 
 
-
+    def updateZoom(self, n):
+        self.__zoom = n
+        self.spectateur.zoom(n)
+        #self.screen.zoom(n)
+        #self.presentateur.zoom(n)
         
     def update(self):
         self.screen.blit(self.background,(0,0))
@@ -31,14 +37,9 @@ class Question():
     '''
     
     '''
-
     def __init__(self, screen, question, reponse, propositions, explication):
         self.screen = screen 
         self.question = question #string
         self.reponse = reponse #index dans la liste proposition
         self.propositions = propositions #liste de propositions
         self.explication = explication #string
-
-
-
-

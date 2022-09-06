@@ -13,4 +13,4 @@ class Presentateur:
     def update(self):
         """cette fonction met à jour l'affichage et la position des spectateurs"""
         self.screen.blit(self.img, (0,0))
-        
+        #changer l'opacité
