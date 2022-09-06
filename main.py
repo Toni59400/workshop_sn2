@@ -1,5 +1,5 @@
 import pygame
-from classGame import Game, Question
+from classGame import Game
 pygame.init()
 
 
@@ -10,7 +10,6 @@ screen = pygame.display.set_mode((1280, 720))
 #le jeu tourne en 384 x 216 pixels
 jeu = True
 game = Game(screen)
-
 
 
 while jeu:

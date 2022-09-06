@@ -15,8 +15,7 @@ class Game:
         self.spectateur = Spectateur(self, self.screen, self.pixel)
         self.presentateur = Presentateur(self, self.screen, self.pixel)
         self.ecran = Ecran(self, self.screen, self.pixel)
-        self.__zoom = 30 #entre 0 et 100
-        self.spectateur.zoom(30)
+        self.zoom = 0 #entre 0 et 100
         #exemple son
         #self.soundEnd = pygame.mixer.Sound("jeuPingPong/assets/sound/applaudissements.mp3")
         #Creationliste des question
@@ -32,8 +31,8 @@ class Game:
     def updateZoom(self, n):
         self.zoom = n
         self.spectateur.zoom(n)
-        #self.screen.zoom(n)
-        #self.presentateur.zoom(n)
+        self.ecran.zoom(n)
+        self.presentateur.zoom(n)
         
     def update(self):
         self.screen.blit(self.background,(0,0))
