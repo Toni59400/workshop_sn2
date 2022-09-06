@@ -16,4 +16,5 @@ class Spectateur:
         self.screen.blit(self.img, (0,0))
     
     def zoom(self, n):
+        print(255-n*4.25)
         self.img.set_alpha(255-n*(-4.25))

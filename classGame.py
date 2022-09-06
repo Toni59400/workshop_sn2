@@ -29,7 +29,7 @@ class Game:
             self.lst_obj_question.append(Question( self ,screen,  i['question'], i["bonne_reponse"], [i['r1'], i['r2']], i['explication']))
 
     def updateZoom(self, n):
-        self.__zoom = n
+        self.zoom = n
         self.spectateur.zoom(n)
         #self.screen.zoom(n)
         #self.presentateur.zoom(n)
