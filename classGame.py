@@ -1,6 +1,5 @@
 import pygame
 from classPresentateur import Presentateur
-
 from classSpectateur import Spectateur
 
 class Game:
