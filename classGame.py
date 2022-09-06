@@ -19,14 +19,23 @@ class Game:
 
 
         
-       
     def update(self):
         self.screen.blit(self.background,(0,0))
         self.spectateur.update()
         self.presentateur.update()
 
+class Question():
+    '''
+    
+    '''
 
-        
+    def __init__(self, screen, question, reponse, propositions, explication):
+        self.screen = screen 
+        self.question = question #string
+        self.reponse = reponse #index dans la liste proposition
+        self.propositions = propositions #liste de propositions
+        self.explication = explication #string
+
 
 
 
