@@ -1,13 +1,13 @@
-from classGame import * 
-
-
+import pygame
+from classGame import Game, Question
 pygame.init()
 
 
 
 # générer la fenêtre de notre jeu
-pygame.display.set_caption("Idiocracy")
+pygame.display.set_caption("Idiocratie 2, Le jeu")
 screen = pygame.display.set_mode((1280, 720))
+#le jeu tourne en 384 x 216 pixels
 jeu = True
 game = Game(screen)
 dict_question = [{"question": "« Les personnes entièrement vaccinées développent le syndrome d’immunodéficience acquise (sida) »", "r1" : "Vrai", "r2" : "Faux", "bonne_reponse" : 2, "explication" : "Cette FakeNews provient du site 'Le Grand Réveil', et elle aurait pour source : 'Les rapports officiels du gouvernement britanique'"},
