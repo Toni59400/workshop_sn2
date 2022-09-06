@@ -13,14 +13,9 @@ class Question():
     '''
     
     '''
-
     def __init__(self, screen, question, reponse, propositions, explication):
         self.screen = screen 
         self.question = question #string
         self.reponse = reponse #index dans la liste proposition
         self.propositions = propositions #liste de propositions
         self.explication = explication #string
-
-
-
-
