@@ -1,7 +1,7 @@
 import pygame
 from classPresentateur import Presentateur
 from classEcran import Ecran
-
+from classQuestion import Question
 from classSpectateur import Spectateur
 
 class Game:
@@ -18,8 +18,15 @@ class Game:
         self.spectateur.zoom(30)
         #exemple son
         #self.soundEnd = pygame.mixer.Sound("jeuPingPong/assets/sound/applaudissements.mp3")
+        #Creationliste des question
+        dict_question = [{"question": "« Les personnes entièrement vaccinées développent le syndrome d’immunodéficience acquise (sida) »", "r1" : "Vrai", "r2" : "Faux", "bonne_reponse" : 2, "explication" : "Cette FakeNews provient du site 'Le Grand Réveil', et elle aurait pour source : 'Les rapports officiels du gouvernement britanique'"},
+                 {"question": "« Le vaccin contre le Covid-19 contiendrait des puces électroniques 5G, pour nous tracer et ficher ! »", "r1" : "Vrai", "r2": "Faux", "bonne_reponse" : 2, "explication" : " Cette FakeNews est relayer sur les reseaux, démentie par le CHU de Toulouse dans un tweet."}
+                ]
 
+        self.lst_obj_question = []
 
+        for i in dict_question : 
+            self.lst_obj_question.append(Question( self ,screen,  i['question'], i["bonne_reponse"], [i['r1'], i['r2']], i['explication']))
 
     def updateZoom(self, n):
         self.__zoom = n
@@ -32,14 +39,6 @@ class Game:
         self.ecran.update()
         self.spectateur.update()
         self.presentateur.update()
+        self.lst_obj_question[0].update()
+        
 
-class Question():
-    '''
-    
-    '''
-    def __init__(self, screen, question, reponse, propositions, explication):
-        self.screen = screen 
-        self.question = question #string
-        self.reponse = reponse #index dans la liste proposition
-        self.propositions = propositions #liste de propositions
-        self.explication = explication #string
