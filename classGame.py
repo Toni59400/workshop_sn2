@@ -22,7 +22,7 @@ class Game:
 
 
     def updateZoom(self, n):
-        self.__zoom = n
+        self.zoom = n
         self.spectateur.zoom(n)
         #self.screen.zoom(n)
         #self.presentateur.zoom(n)
