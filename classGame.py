@@ -19,6 +19,7 @@ class Game:
         self.zoom = 0 #entre 0 et 100
         self.compteurAnim = 0
         self.phase = "question"
+        self.compteur = 0
         #exemple son
         #self.soundEnd = pygame.mixer.Sound("jeuPingPong/assets/sound/applaudissements.mp3")
         #Creationliste des question
@@ -47,6 +48,7 @@ class Game:
         self.presentateur.zoom(n)
         
     def update(self):
+        self.compteur += 1
         if self.phase == "dezoom" :
             if self.zoom>0:
                 self.updateZoom(self.zoom-5)
@@ -56,7 +58,7 @@ class Game:
             if self.zoom < 100:
                 self.updateZoom(self.zoom+5)
             else : 
-                self.phase = "dezoom"
+                self.phase = self.rep
 
         
             
@@ -73,8 +75,11 @@ class Game:
         """
         choix = 1
         if self.lst_obj_question[self.n_question].reponse == choix : 
-            self.phase = "BonneRep"
-            print('bonne reponse')
+            self.phase = "zoom"
+            self.rep = "animBonneRep"
+        else:
+            self.phase = "zoom"
+            self.rep = "animMauvaiseRep"
     
     def eventCarreDroite(self):
         """
@@ -82,8 +87,11 @@ class Game:
         """
         choix = 2
         if self.lst_obj_question[self.n_question].reponse == choix : 
-            self.phase = "MauvaiseRep"
-            print('bonne reponse')
+            self.phase = "zoom"
+            self.rep = "animBonneRep"
+        else:
+            self.phase = "zoom"
+            self.rep = "animMauvaiseRep"
 
     def animationBonneReponse(self):
         self.phase = "animBonRep"
@@ -105,8 +113,22 @@ class Game:
         self.spectateur.imgOrigin = pygame.transform.scale(pygame.image.load('assets/spectateur/spectateur.png'),(384*self.pixel[0],216*self.pixel[1]))
         self.spectateur.img = pygame.transform.scale(self.spectateur.img,(384*self.pixel[0],216*self.pixel[1]))
 
+        #redefinition des images de l'écran
         self.ecran.img = pygame.transform.scale(self.ecran.img,(384*self.pixel[0],216*self.pixel[1]))
-        self.ecran.imgOrigin = pygame.transform.scale(pygame.image.load('assets/ecran/ecran0.png'),(384*self.pixel[0],216*self.pixel[1]))
+        self.ecran.imgOrigin = {'attente':[
+                pygame.transform.scale(pygame.image.load('assets/ecran/ecran0.png'),(384*self.pixel[0],216*self.pixel[1])),
+                pygame.transform.scale(pygame.image.load('assets/ecran/ecran1.png'),(384*self.pixel[0],216*self.pixel[1]))],
+            'bonneRep':[
+                pygame.transform.scale(pygame.image.load('assets/ecran/ecranRight0.png'),(384*self.pixel[0],216*self.pixel[1])),
+                pygame.transform.scale(pygame.image.load('assets/ecran/ecranRight1.png'),(384*self.pixel[0],216*self.pixel[1])),
+                pygame.transform.scale(pygame.image.load('assets/ecran/ecranRight2.png'),(384*self.pixel[0],216*self.pixel[1]))
+            ],
+            'mauvaiseRep':[
+                pygame.transform.scale(pygame.image.load('assets/ecran/ecranWrong0.png'),(384*self.pixel[0],216*self.pixel[1])),
+                pygame.transform.scale(pygame.image.load('assets/ecran/ecranWrong1.png'),(384*self.pixel[0],216*self.pixel[1])),
+                pygame.transform.scale(pygame.image.load('assets/ecran/ecranWrong2.png'),(384*self.pixel[0],216*self.pixel[1]))
+            ]
+        }
         self.ecran.imgOriginStructure = pygame.transform.scale(self.ecran.imgOriginStructure,(384*self.pixel[0],216*self.pixel[1]))
         self.ecran.imgStructure = pygame.transform.scale(pygame.image.load('assets/ecran/structure.png'),(384*self.pixel[0],216*self.pixel[1]))
 

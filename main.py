@@ -11,9 +11,11 @@ screen = pygame.display.set_mode((1280,720), pygame.RESIZABLE)
 #le jeu tourne en 384 x 216 pixels
 jeu = True
 game = Game(screen)
-
+clock = pygame.time.Clock()
+fps = 30
 
 while jeu:
+    clock.tick(fps)
     pygame.display.flip()
     game.update()
     x,y = pygame.mouse.get_pos()
@@ -33,7 +35,4 @@ while jeu:
         elif event.type == pygame.KEYUP:
             game.pressed[event.key] = False
         
-# charger notre jeu 
-clock = pygame.time.Clock()
-fps = 30
-running = True
+
