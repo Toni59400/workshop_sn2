@@ -1,3 +1,4 @@
+from turtle import update
 import pygame
 from classPresentateur import Presentateur
 from classEcran import Ecran
@@ -35,6 +36,8 @@ class Game:
         self.presentateur.zoom(n)
         
     def update(self):
+        #if self.zoom < 100:
+        #    self.updateZoom(self.zoom+3)
         self.screen.blit(self.background,(0,0))
         
         self.ecran.update()
