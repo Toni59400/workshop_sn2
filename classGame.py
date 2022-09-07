@@ -98,8 +98,22 @@ class Game:
         self.spectateur.imgOrigin = pygame.transform.scale(pygame.image.load('assets/spectateur/spectateur.png'),(384*self.pixel[0],216*self.pixel[1]))
         self.spectateur.img = pygame.transform.scale(self.spectateur.img,(384*self.pixel[0],216*self.pixel[1]))
 
+        #redefinition des images de l'écran
         self.ecran.img = pygame.transform.scale(self.ecran.img,(384*self.pixel[0],216*self.pixel[1]))
-        self.ecran.imgOrigin = pygame.transform.scale(pygame.image.load('assets/ecran/ecran0.png'),(384*self.pixel[0],216*self.pixel[1]))
+        self.ecran.imgOrigin = {'attente':[
+                pygame.transform.scale(pygame.image.load('assets/ecran/ecran0.png'),(384*self.pixel[0],216*self.pixel[1])),
+                pygame.transform.scale(pygame.image.load('assets/ecran/ecran1.png'),(384*self.pixel[0],216*self.pixel[1]))],
+            'bonneRep':[
+                pygame.transform.scale(pygame.image.load('assets/ecran/ecranRight0.png'),(384*self.pixel[0],216*self.pixel[1])),
+                pygame.transform.scale(pygame.image.load('assets/ecran/ecranRight1.png'),(384*self.pixel[0],216*self.pixel[1])),
+                pygame.transform.scale(pygame.image.load('assets/ecran/ecranRight2.png'),(384*self.pixel[0],216*self.pixel[1]))
+            ],
+            'mauvaiseRep':[
+                pygame.transform.scale(pygame.image.load('assets/ecran/ecranWrong0.png'),(384*self.pixel[0],216*self.pixel[1])),
+                pygame.transform.scale(pygame.image.load('assets/ecran/ecranWrong1.png'),(384*self.pixel[0],216*self.pixel[1])),
+                pygame.transform.scale(pygame.image.load('assets/ecran/ecranWrong2.png'),(384*self.pixel[0],216*self.pixel[1]))
+            ]
+        }
         self.ecran.imgOriginStructure = pygame.transform.scale(self.ecran.imgOriginStructure,(384*self.pixel[0],216*self.pixel[1]))
         self.ecran.imgStructure = pygame.transform.scale(pygame.image.load('assets/ecran/structure.png'),(384*self.pixel[0],216*self.pixel[1]))
 
