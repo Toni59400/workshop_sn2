@@ -17,6 +17,8 @@ class Game:
         self.presentateur = Presentateur(self, self.screen, self.pixel)
         self.ecran = Ecran(self, self.screen, self.pixel)
         self.zoom = 0 #entre 0 et 100
+        self.compteurAnim = 0
+        self.phase = "question"
         #exemple son
         #self.soundEnd = pygame.mixer.Sound("jeuPingPong/assets/sound/applaudissements.mp3")
         #Creationliste des question
@@ -52,9 +54,9 @@ class Game:
         print("carreDroite")
 
     def animationBonneReponse(self):
-        pass
+        self.phase = "animBonRep"
 
     def animationMauvaiseReponse(self):
-        pass
+        self.phase = "animBonRep"
             
 
