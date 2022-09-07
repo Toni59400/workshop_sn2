@@ -11,7 +11,7 @@ class Ecran:
         self.imgOrigin = pygame.transform.scale(pygame.image.load('assets/ecran/ecran0.png'),(384*self.pixel[0],216*self.pixel[1]))
         self.img = self.imgOrigin
         self.imgOriginStructure = pygame.transform.scale(pygame.image.load('assets/ecran/structure.png'),(384*self.pixel[0],216*self.pixel[1]))
-        self.imgStructure = self.imgOrigin
+        self.imgStructure = self.imgOriginStructure
 
     def update(self):
         """cette fonction met à jour l'affichage et la position des spectateurs"""

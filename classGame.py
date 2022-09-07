@@ -44,5 +44,17 @@ class Game:
         self.spectateur.update()
         self.presentateur.update()
         self.lst_obj_question[0].update()
-        
+    
+    def eventCarreGauche(self):
+        print("carreGauche")
+    
+    def eventCarreDroite(self):
+        print("carreDroite")
+
+    def animationBonneReponse(self):
+        pass
+
+    def animationMauvaiseReponse(self):
+        pass
+            
 
