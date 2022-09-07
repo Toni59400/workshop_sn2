@@ -17,9 +17,13 @@ while jeu:
     pygame.display.flip()
     game.update()
     x,y = pygame.mouse.get_pos()
-    if (x<(96+20)*game.pixel[0] and x>20*game.pixel[0]) and (y<(140+64)*game.pixel[1] and y>140*game.pixel[1]):
-        print('dessus')
     for event in pygame.event.get():
+        #Bouton gauche
+        if (x<(96+20)*game.pixel[0] and x>20*game.pixel[0]) and (y<(140+64)*game.pixel[1] and y>140*game.pixel[1]) and event.type == pygame.MOUSEBUTTONUP :
+            print('dessus gauche')
+        #Bouton droite
+        if (x<(96+140)*game.pixel[0] and x>140*game.pixel[0]) and (y<(140+64)*game.pixel[1] and y>140*game.pixel[1]) and event.type == pygame.MOUSEBUTTONUP :
+            print('dessus droite')
         if event.type == pygame.QUIT:
             jeu = False
         if event.type == pygame.KEYDOWN:
