@@ -36,9 +36,10 @@ class Game:
         
     def update(self):
         self.screen.blit(self.background,(0,0))
+        
         self.ecran.update()
         self.spectateur.update()
         self.presentateur.update()
-        self.lst_obj_question[1].update()
+        self.lst_obj_question[0].update()
         
 
