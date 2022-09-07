@@ -23,11 +23,14 @@ class Question():
 
     def update(self):
         """cette fonction met à jour l'affichage et la position des spectateurs"""
+        #calcul du pixel
+        self.pixel = (self.screen.get_width()/384, self.screen.get_height()/216)
+        
         self.black = (0,0,0)
         self.screen.blit(self.img, (0,0))
         # prochaine ligne = rectangle avec les reponses affichées dedans 
-        self.screen.blit(self.reponse1, (20*self.pixel[0], 140*self.pixel[1]))
-        self.screen.blit(self.reponse1, (140*self.pixel[0], 140*self.pixel[1]))
+        self.screen.blit(self.reponse1, (20*self.pixel[0], 140*self.pixel[1])) #rectangle rep 1
+        self.screen.blit(self.reponse1, (140*self.pixel[0], 140*self.pixel[1])) #rectangle rep 2
         width_max = 64
         width_max_res = 23
         wrapped_lines_rep1 = textwrap.wrap(self.propositions[0], width_max_res)

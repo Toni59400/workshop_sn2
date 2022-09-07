@@ -47,6 +47,8 @@ class Game:
         self.presentateur.zoom(n)
         
     def update(self):
+        #calcul du pixel
+        self.pixel = (self.screen.get_width()/384, self.screen.get_height()/216)
         #if self.zoom < 100:
         #    self.updateZoom(self.zoom+3)
         self.screen.blit(self.background,(0,0))
