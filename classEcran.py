@@ -15,6 +15,9 @@ class Ecran:
 
     def update(self):
         """cette fonction met à jour l'affichage et la position des spectateurs"""
+        #calcul du pixel
+        self.pixel = (self.screen.get_width()/384, self.screen.get_height()/216)
+        
         self.screen.blit(self.img, (self.pixel[0]*192 - self.img.get_width()/2, self.pixel[1]*108 - self.img.get_height()/2 + 68*self.pixel[1]/100*self.game.zoom))
         self.screen.blit(self.imgStructure, (self.pixel[0]*192 - self.img.get_width()/2, self.pixel[1]*108 - self.img.get_height()/2 + 68*self.pixel[1]/100*self.game.zoom))
 

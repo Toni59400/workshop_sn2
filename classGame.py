@@ -17,6 +17,7 @@ class Game:
         self.presentateur = Presentateur(self, self.screen, self.pixel)
         self.ecran = Ecran(self, self.screen, self.pixel)
         self.zoom = 0 #entre 0 et 100
+        self.compteurAnim = 0
         self.phase = "question"
         #exemple son
         #self.soundEnd = pygame.mixer.Sound("jeuPingPong/assets/sound/applaudissements.mp3")
@@ -72,7 +73,7 @@ class Game:
         """
         choix = 1
         if self.lst_obj_question[self.n_question].reponse == choix : 
-            self.phase = "zoom"
+            self.phase = "BonneRep"
             print('bonne reponse')
     
     def eventCarreDroite(self):
@@ -81,13 +82,43 @@ class Game:
         """
         choix = 2
         if self.lst_obj_question[self.n_question].reponse == choix : 
-            self.phase = "zoom"
+            self.phase = "MauvaiseRep"
             print('bonne reponse')
 
     def animationBonneReponse(self):
-        pass
+        self.phase = "animBonRep"
 
     def animationMauvaiseReponse(self):
-        pass
-            
+        self.phase = "animBonRep"
+
+    def resize(self):
+        """cette fonction recalcule les dimensions de tout les elements si la taille est modifiée"""
+        #calcul du pixel
+        self.pixel = (self.screen.get_width()/384, self.screen.get_height()/216)
+        self.presentateur.pixel = (self.screen.get_width()/384, self.screen.get_height()/216)
+        self.spectateur.pixel = self.pixel
+        self.ecran.pixel = self.pixel
+
+        #images
+        self.background = pygame.transform.scale(pygame.image.load('assets/background.png'),(384*self.pixel[0],216*self.pixel[1]))
+
+        self.spectateur.imgOrigin = pygame.transform.scale(pygame.image.load('assets/spectateur/spectateur.png'),(384*self.pixel[0],216*self.pixel[1]))
+        self.spectateur.img = pygame.transform.scale(self.spectateur.img,(384*self.pixel[0],216*self.pixel[1]))
+
+        self.ecran.img = pygame.transform.scale(self.ecran.img,(384*self.pixel[0],216*self.pixel[1]))
+        self.ecran.imgOrigin = pygame.transform.scale(pygame.image.load('assets/ecran/ecran0.png'),(384*self.pixel[0],216*self.pixel[1]))
+        self.ecran.imgOriginStructure = pygame.transform.scale(self.ecran.imgOriginStructure,(384*self.pixel[0],216*self.pixel[1]))
+        self.ecran.imgStructure = pygame.transform.scale(pygame.image.load('assets/ecran/structure.png'),(384*self.pixel[0],216*self.pixel[1]))
+
+        self.presentateur.imgOrigin = pygame.transform.scale(pygame.image.load('assets/presentateur/presentateur.png'),(384*self.pixel[0],216*self.pixel[1]))
+        self.presentateur.img = pygame.transform.scale(self.presentateur.imgOrigin,(384*self.pixel[0],216*self.pixel[1]))
+
+        for k in self.lst_obj_question:
+            k.pixel = self.pixel
+            k.img = pygame.transform.scale(pygame.image.load('assets/presentateur/bulle.png'),(384*self.pixel[0],216*self.pixel[1]))
+            k.reponse1 = pygame.transform.scale(pygame.image.load('assets/presentateur/carreRep.png'), (96*self.pixel[0], 64*self.pixel[1]))
+            k.reponse2 = pygame.transform.scale(pygame.image.load('assets/presentateur/carreRep.png'), (96*self.pixel[0], 64*self.pixel[1]))
+            k.arial_font = pygame.font.SysFont("arial", round(8*self.pixel[1]))
+            k.rectangle = pygame.draw.rect(k.screen, k.white, pygame.Rect(30*self.pixel[0], 25*self.pixel[1], 250*self.pixel[0], 68*self.pixel[1]), width=0)
+
 
