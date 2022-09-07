@@ -19,6 +19,7 @@ class Game:
         self.zoom = 0 #entre 0 et 100
         self.compteurAnim = 0
         self.phase = "question"
+        self.compteur = 0
         #exemple son
         #self.soundEnd = pygame.mixer.Sound("jeuPingPong/assets/sound/applaudissements.mp3")
         #Creationliste des question
@@ -47,6 +48,7 @@ class Game:
         self.presentateur.zoom(n)
         
     def update(self):
+        self.compteur += 1
         if self.phase == "dezoom" :
             if self.zoom>0:
                 self.updateZoom(self.zoom-5)
@@ -56,7 +58,7 @@ class Game:
             if self.zoom < 100:
                 self.updateZoom(self.zoom+5)
             else : 
-                self.phase = "dezoom"
+                self.phase = self.rep
 
         
             
@@ -73,8 +75,11 @@ class Game:
         """
         choix = 1
         if self.lst_obj_question[self.n_question].reponse == choix : 
-            self.phase = "BonneRep"
-            print('bonne reponse')
+            self.phase = "zoom"
+            self.rep = "animBonneRep"
+        else:
+            self.phase = "zoom"
+            self.rep = "animMauvaiseRep"
     
     def eventCarreDroite(self):
         """
@@ -82,8 +87,11 @@ class Game:
         """
         choix = 2
         if self.lst_obj_question[self.n_question].reponse == choix : 
-            self.phase = "MauvaiseRep"
-            print('bonne reponse')
+            self.phase = "zoom"
+            self.rep = "animBonneRep"
+        else:
+            self.phase = "zoom"
+            self.rep = "animMauvaiseRep"
 
     def animationBonneReponse(self):
         self.phase = "animBonRep"
