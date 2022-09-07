@@ -53,5 +53,25 @@ class Game:
         self.spectateur.update()
         self.presentateur.update()
         self.lst_obj_question[8].update()
-        
+    
+    def eventCarreGauche(self):
+        """
+        Dans ce carré se trouve toujours la reponse 1 (rep1) du dictionnaire.
+        """
+        choix = 1
+        print("carreGauche")
+    
+    def eventCarreDroite(self):
+        """
+        Dans ce carré se trouve toujours la reponse 2 (rep2) du dictionnaire.
+        """
+
+        print("carreDroite")
+
+    def animationBonneReponse(self):
+        pass
+
+    def animationMauvaiseReponse(self):
+        pass
+            
 
