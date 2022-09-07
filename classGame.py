@@ -10,7 +10,7 @@ class Game:
         """
         screen - pygame.Screen - l'écran sur lequel s'affiche le jeu"""
         self.screen = screen
-        self.n_question = 2
+        self.n_question = 8
         self.pixel = (self.screen.get_width()/384, self.screen.get_height()/216)
         self.background = pygame.transform.scale(pygame.image.load('assets/background.png'),(384*self.pixel[0],216*self.pixel[1]))
         self.spectateur = Spectateur(self, self.screen, self.pixel)
@@ -46,9 +46,19 @@ class Game:
         self.presentateur.zoom(n)
         
     def update(self):
+        if self.phase == "dezoom" :
+            if self.zoom>0:
+                self.updateZoom(self.zoom-5)
+            else : 
+                self.phase = "explication"
         if self.phase == "zoom" : 
             if self.zoom < 100:
-                self.updateZoom(self.zoom+3)
+                self.updateZoom(self.zoom+5)
+            else : 
+                self.phase = "dezoom"
+
+        
+            
         self.screen.blit(self.background,(0,0))
         
         self.ecran.update()

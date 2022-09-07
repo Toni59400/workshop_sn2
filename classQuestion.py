@@ -51,3 +51,11 @@ class Question():
                 self.rep2 = self.arial_font.render(k, False, self.black)
                 self.screen.blit(self.rep2, (145*self.pixel[0], 145*self.pixel[1]+(10*self.pixel[1])*c))
                 c+=1
+        elif self.game.phase == "explication" :
+            wrapped_lines_explication = textwrap.wrap(self.explication, 64)
+            self.screen.blit(self.img, (0,0))
+            cpt =0
+            for u in wrapped_lines_explication : 
+                self.explication2 = self.arial_font.render(u, False, self.black)
+                self.screen.blit(self.explication2, [30*self.pixel[0], 25*self.pixel[1]+(10*self.pixel[1])*cpt])
+                cpt+=1
