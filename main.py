@@ -18,6 +18,8 @@ while jeu:
     game.update()
     x,y = pygame.mouse.get_pos()
     for event in pygame.event.get():
+        if event.type == pygame.VIDEORESIZE:
+            game.resize()
         #Bouton gauche
         if (x<(96+20)*game.pixel[0] and x>20*game.pixel[0]) and (y<(140+64)*game.pixel[1] and y>140*game.pixel[1]) and event.type == pygame.MOUSEBUTTONUP :
             game.eventCarreGauche()
