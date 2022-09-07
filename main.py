@@ -7,7 +7,7 @@ pygame.init()
 
 # générer la fenêtre de notre jeu
 pygame.display.set_caption("Idiocratie 2, Le jeu")
-screen = pygame.display.set_mode((630,360))
+screen = pygame.display.set_mode((1280,720))
 #le jeu tourne en 384 x 216 pixels
 jeu = True
 game = Game(screen)
