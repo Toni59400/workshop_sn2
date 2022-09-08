@@ -1,6 +1,7 @@
 from tkinter import Label
 import pygame
 import textwrap
+import random
 
 class Question():
     '''
@@ -14,6 +15,9 @@ class Question():
         self.propositions = propositions #liste de propositions
         self.explication = explication #string
         self.game = game
+        self.choix = ""
+        self.choix2 = ""
+        self.choice_effect = False
         self.timerNext = 0
         self.pixel = game.pixel
         self.img_btn = [
@@ -71,3 +75,30 @@ class Question():
                     self.explication2 = self.arial_font.render(u, False, (0,0,0))
                     self.screen.blit(self.explication2, [30*self.pixel[0], 25*self.pixel[1]+(10*self.pixel[1])*cpt])
                     cpt+=1
+            
+            elif self.game.phase == 'fin_gagner' : 
+                conseil = ['Félicitation tu n\'es pas sensible au fakenews et tu réfléchis assez avant de répondre.']
+                if not(self.choice_effect):
+                    self.choix2 = random.choice(conseil)
+                    self.choice_effect = True
+                wrapped_line_conseil_gagner = textwrap.wrap(self.choix2, 64)
+                self.screen.blit(self.img, (0,0))
+                cpt = 0 
+                for n in wrapped_line_conseil_gagner:
+                    tmp = self.arial_font.render(n, False, (0,0,0))
+                    self.screen.blit(tmp, [30*self.pixel[0], 25*self.pixel[1]+(10*self.pixel[1])*cpt])
+                    cpt+=1
+
+            elif self.game.phase == 'fin_perdu': 
+                conseil = ['Il faut se mefier, même de sois-même !', 'Il ne faut pas relayer les informations sur lesquels on a un doute, ou qui paraissent "grosse"']
+                if not(self.choice_effect) : 
+                    self.choix = random.choice(conseil)
+                    self.choice_effect = True
+                wrapped_line_conseil_perdu = textwrap.wrap(self.choix, 64)
+                self.screen.blit(self.img, (0,0))
+                cpt = 0 
+                for m in wrapped_line_conseil_perdu:
+                    tmp = self.arial_font.render(m, False, (0,0,0))
+                    self.screen.blit(tmp, [30*self.pixel[0], 25*self.pixel[1]+(10*self.pixel[1])*cpt])
+                    cpt+=1
+

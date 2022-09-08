@@ -17,6 +17,8 @@ class Game:
         self.pixel = (self.screen.get_width()/384, self.screen.get_height()/216)
         self.background = pygame.transform.scale(pygame.image.load('assets/background.png'),(384*self.pixel[0],216*self.pixel[1]))
         self.spectateur = Spectateur(self, self.screen, self.pixel)
+        self.terre_p = pygame.transform.scale(pygame.image.load('assets/terrePlate.png'), (32*self.pixel[0], 32*self.pixel[1]))
+        self.terre_r = pygame.transform.scale(pygame.image.load('assets/terreRonde.png'), (32*self.pixel[0], 32*self.pixel[1]))
         self.presentateur = Presentateur(self, self.screen, self.pixel)
         self.ecran = Ecran(self, self.screen, self.pixel)
         self.zoom = 0 #entre 0 et 100
@@ -63,8 +65,18 @@ class Game:
                 self.updateZoom(self.zoom+5)
             else : 
                 self.phase = self.rep
-        
 
+        if self.phase != "zoom" or self.phase !="dezoom" : 
+        
+            if self.bonne_reponse - self.mauvaise_reponse >= 2 :
+                ## Codage de fin du jeu : partie gagnée 
+                self.phase = "fin_gagner"
+
+            if self.mauvaise_reponse - self.bonne_reponse >= 2 :
+                ## Codage de fin du jeu : partie perdue
+                self.phase = "fin_perdu"
+
+        
         
         
         self.screen.blit(self.background,(0,0))
@@ -74,9 +86,12 @@ class Game:
         self.presentateur.update()
 
         self.lst_obj_question[self.n_question].update()
-        pygame.draw.rect(self.screen, (245,10,10), pygame.Rect(self.screen.get_width()/5, 4*self.pixel[1], (self.screen.get_width()/5)*3, 10*self.pixel[1]))
-        pygame.draw.rect(self.screen, (0,255,0), pygame.Rect(self.screen.get_width()/2-10*self.pixel[0]+(3/20*self.screen.get_width())*(self.bonne_reponse-self.mauvaise_reponse), 4*self.pixel[1], 20*self.pixel[0], 10*self.pixel[0]))
-    
+        pygame.draw.rect(self.screen, (245,10,10), pygame.Rect(self.screen.get_width()/5, 10*self.pixel[1], (self.screen.get_width()/5)*3, 4*self.pixel[1]))
+        pygame.draw.rect(self.screen, (0,255,0), pygame.Rect(self.screen.get_width()/2-10*self.pixel[0]+(3/20*self.screen.get_width())*(self.bonne_reponse-self.mauvaise_reponse), 7*self.pixel[1], 20*self.pixel[0], 10*self.pixel[0]))
+        
+        self.screen.blit(self.terre_p, (self.screen.get_width()/5-80, -10))
+        self.screen.blit(self.terre_r, ((self.screen.get_width()/5)*3+230, 2*self.pixel[1]))
+
     def eventCarreGauche(self):
         """
         Dans ce carré se trouve toujours la reponse 1 (rep1) du dictionnaire.
