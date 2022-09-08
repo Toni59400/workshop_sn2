@@ -30,9 +30,5 @@ while jeu:
             game.eventCarreDroite()
         if event.type == pygame.QUIT:
             jeu = False
-        if event.type == pygame.KEYDOWN:
-            game.pressed[event.key] = True
-        elif event.type == pygame.KEYUP:
-            game.pressed[event.key] = False
         
 
