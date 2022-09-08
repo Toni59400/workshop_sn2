@@ -16,8 +16,9 @@ class Question():
         self.game = game
         self.pixel = game.pixel
         self.img_btn = [
-                        pygame.transform.scale(pygame.image.load('asset/'))
-        ]
+                        pygame.transform.scale(pygame.image.load('assets/presentateur/boutonNext.png'), (96*self.pixel[0], 48*self.pixel[1])),
+                        pygame.transform.scale(pygame.image.load('assets/presentateur/boutonNextPushed.png'), (96*self.pixel[0], 48*self.pixel[1]))
+                        ]
         self.img = pygame.transform.scale(pygame.image.load('assets/presentateur/bulle.png'),(384*self.pixel[0],216*self.pixel[1]))
         self.reponse1 = pygame.transform.scale(pygame.image.load('assets/presentateur/carreRep.png'), (96*self.pixel[0], 64*self.pixel[1]))
         self.reponse2 = pygame.transform.scale(pygame.image.load('assets/presentateur/carreRep.png'), (96*self.pixel[0], 64*self.pixel[1]))
@@ -57,9 +58,9 @@ class Question():
         elif self.game.phase == "explication" :
             wrapped_lines_explication = textwrap.wrap(self.explication, 64)
             self.screen.blit(self.img, (0,0))
+            self.screen.blit(self.img_btn[0], (20*self.pixel[0], 140*self.pixel[1]))
             cpt =0
             for u in wrapped_lines_explication : 
-                self.explication2 = self.arial_font.render(u, False, self.black)
+                self.explication2 = self.arial_font.render(u, False, (0,0,0))
                 self.screen.blit(self.explication2, [30*self.pixel[0], 25*self.pixel[1]+(10*self.pixel[1])*cpt])
                 cpt+=1
-                

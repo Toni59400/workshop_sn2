@@ -10,7 +10,7 @@ class Game:
         """
         screen - pygame.Screen - l'écran sur lequel s'affiche le jeu"""
         self.screen = screen
-        self.n_question = -1
+        self.n_question = 0
         self.pixel = (self.screen.get_width()/384, self.screen.get_height()/216)
         self.background = pygame.transform.scale(pygame.image.load('assets/background.png'),(384*self.pixel[0],216*self.pixel[1]))
         self.spectateur = Spectateur(self, self.screen, self.pixel)
@@ -59,6 +59,7 @@ class Game:
                 self.updateZoom(self.zoom+5)
             else : 
                 self.phase = self.rep
+        print(self.phase)
 
         
         
@@ -68,9 +69,8 @@ class Game:
         self.spectateur.update()
         self.presentateur.update()
 
-        if self.phase == "question" : 
-            if self.n_question <= len(self.lst_obj_question): 
-                self.lst_obj_question[self.n_question].update()
+        self.lst_obj_question[self.n_question].update()
+                
     
     def eventCarreGauche(self):
         """
@@ -91,13 +91,19 @@ class Game:
         """
         choix = 2
         if self.lst_obj_question[self.n_question].reponse == choix : 
-            self.n_question+=1
             self.phase = "zoom"
             self.rep = "animBonneRep"
         else:
-            self.n_question+=1
             self.phase = "zoom"
             self.rep = "animMauvaiseRep"
+
+    def eventSuivant(self) : 
+        """
+        Animation du bouton suivant et incrementation de l'index de la question actuelle
+        """
+        if self.n_question < len(self.lst_obj_question)-1 : 
+            self.n_question+=1
+            self.phase = "question"
 
 
     def resize(self):
