@@ -9,6 +9,7 @@ class Ecran:
         self.game = game
         self.pixel = pixel
         self.zoomN = 0
+        
         self.imgOriginLumiere = pygame.transform.scale(pygame.image.load('assets/lumieres.png'),(384*self.pixel[0],216*self.pixel[1]))
         self.imgLumiere = self.imgOriginLumiere
         self.imgOrigin = {'attente':[

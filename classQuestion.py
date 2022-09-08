@@ -1,6 +1,7 @@
 from tkinter import Label
 import pygame
 import textwrap
+import random
 
 class Question():
     '''
@@ -14,6 +15,9 @@ class Question():
         self.propositions = propositions #liste de propositions
         self.explication = explication #string
         self.game = game
+        self.choix = ""
+        self.choix2 = ""
+        self.choice_effect = False
         self.timerNext = 0
         self.pixel = game.pixel
         self.img_btn = [
@@ -71,3 +75,5 @@ class Question():
                     self.explication2 = self.arial_font.render(u, False, (0,0,0))
                     self.screen.blit(self.explication2, [30*self.pixel[0], 25*self.pixel[1]+(10*self.pixel[1])*cpt])
                     cpt+=1
+           
+
