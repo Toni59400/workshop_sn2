@@ -9,6 +9,8 @@ class Ecran:
         self.game = game
         self.pixel = pixel
         self.zoomN = 0
+        self.imgOriginLumiere = pygame.transform.scale(pygame.image.load('assets/lumieres.png'),(384*self.pixel[0],216*self.pixel[1]))
+        self.imgLumiere = self.imgOriginLumiere
         self.imgOrigin = {'attente':[
                 pygame.transform.scale(pygame.image.load('assets/ecran/ecran0.png'),(384*self.pixel[0],216*self.pixel[1])),
                 pygame.transform.scale(pygame.image.load('assets/ecran/ecran1.png'),(384*self.pixel[0],216*self.pixel[1]))],
@@ -64,3 +66,4 @@ class Ecran:
         self.zoomN = n
         self.img = pygame.transform.rotozoom(self.imgOrigin['attente'][self.compteurAnimAttente],0,1+(n*(2.5/255)))
         self.imgStructure = pygame.transform.rotozoom(self.imgOriginStructure,0,1+(n*(2.5/255)))
+        self.imgLumiere = pygame.transform.rotozoom(self.imgOriginLumiere,0,1+(n*(2.5/255)))

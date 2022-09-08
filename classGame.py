@@ -60,7 +60,7 @@ class Game:
                 self.updateZoom(self.zoom+5)
             else : 
                 self.phase = self.rep
-        print(self.phase)
+        
 
         
         
@@ -68,6 +68,7 @@ class Game:
         
         self.ecran.update()
         self.spectateur.update()
+        self.screen.blit(self.ecran.imgLumiere, (self.pixel[0]*192 - self.ecran.imgLumiere.get_width()/2, self.pixel[1]*108 - self.ecran.imgLumiere.get_height()/2 + 68*self.pixel[1]/100*self.zoom))
         self.presentateur.update()
 
         self.lst_obj_question[self.n_question].update()
@@ -127,21 +128,40 @@ class Game:
                 pygame.transform.scale(pygame.image.load('assets/ecran/ecran0.png'),(384*self.pixel[0],216*self.pixel[1])),
                 pygame.transform.scale(pygame.image.load('assets/ecran/ecran1.png'),(384*self.pixel[0],216*self.pixel[1]))],
             'bonneRep':[
-                pygame.transform.scale(pygame.image.load('assets/ecran/ecranRight0.png'),(384*self.pixel[0],216*self.pixel[1])),
-                pygame.transform.scale(pygame.image.load('assets/ecran/ecranRight1.png'),(384*self.pixel[0],216*self.pixel[1])),
-                pygame.transform.scale(pygame.image.load('assets/ecran/ecranRight2.png'),(384*self.pixel[0],216*self.pixel[1]))
+                pygame.transform.rotozoom(pygame.transform.scale(pygame.image.load('assets/ecran/ecranRight0.png'),(384*self.pixel[0],216*self.pixel[1])),0,1+(50/51)),
+                pygame.transform.rotozoom(pygame.transform.scale(pygame.image.load('assets/ecran/ecranRight1.png'),(384*self.pixel[0],216*self.pixel[1])),0,1+(50/51)),
+                pygame.transform.rotozoom(pygame.transform.scale(pygame.image.load('assets/ecran/ecranRight2.png'),(384*self.pixel[0],216*self.pixel[1])),0,1+(50/51)),
+                pygame.transform.rotozoom(pygame.transform.scale(pygame.image.load('assets/ecran/ecranRight1.png'),(384*self.pixel[0],216*self.pixel[1])),0,1+(50/51)),
+                pygame.transform.rotozoom(pygame.transform.scale(pygame.image.load('assets/ecran/ecranRight0.png'),(384*self.pixel[0],216*self.pixel[1])),0,1+(50/51))
             ],
             'mauvaiseRep':[
-                pygame.transform.scale(pygame.image.load('assets/ecran/ecranWrong0.png'),(384*self.pixel[0],216*self.pixel[1])),
-                pygame.transform.scale(pygame.image.load('assets/ecran/ecranWrong1.png'),(384*self.pixel[0],216*self.pixel[1])),
-                pygame.transform.scale(pygame.image.load('assets/ecran/ecranWrong2.png'),(384*self.pixel[0],216*self.pixel[1]))
+                pygame.transform.rotozoom(pygame.transform.scale(pygame.image.load('assets/ecran/ecranWrong0.png'),(384*self.pixel[0],216*self.pixel[1])),0,1+(50/51)),
+                pygame.transform.rotozoom(pygame.transform.scale(pygame.image.load('assets/ecran/ecranWrong1.png'),(384*self.pixel[0],216*self.pixel[1])),0,1+(50/51)),
+                pygame.transform.rotozoom(pygame.transform.scale(pygame.image.load('assets/ecran/ecranWrong2.png'),(384*self.pixel[0],216*self.pixel[1])),0,1+(50/51)),
+                pygame.transform.rotozoom(pygame.transform.scale(pygame.image.load('assets/ecran/ecranWrong1.png'),(384*self.pixel[0],216*self.pixel[1])),0,1+(50/51)),
+                pygame.transform.rotozoom(pygame.transform.scale(pygame.image.load('assets/ecran/ecranWrong0.png'),(384*self.pixel[0],216*self.pixel[1])),0,1+(50/51))
             ]
         }
         self.ecran.imgOriginStructure = pygame.transform.scale(self.ecran.imgOriginStructure,(384*self.pixel[0],216*self.pixel[1]))
         self.ecran.imgStructure = pygame.transform.scale(pygame.image.load('assets/ecran/structure.png'),(384*self.pixel[0],216*self.pixel[1]))
 
-        self.presentateur.imgOrigin = pygame.transform.scale(pygame.image.load('assets/presentateur/presentateur.png'),(384*self.pixel[0],216*self.pixel[1]))
-        self.presentateur.img = pygame.transform.scale(self.presentateur.imgOrigin,(384*self.pixel[0],216*self.pixel[1]))
+        self.presentateur.imgOrigin = {"attente":
+            [pygame.transform.scale(pygame.image.load('assets/presentateur/presentateur0.png'),(384*self.pixel[0],216*self.pixel[1])), 
+            pygame.transform.scale(pygame.image.load('assets/presentateur/presentateur1.png'),(384*self.pixel[0],216*self.pixel[1]))],
+            "animation0":[pygame.transform.scale(pygame.image.load('assets/presentateur/presentateur0.0.png'),(384*self.pixel[0],216*self.pixel[1])), 
+            pygame.transform.scale(pygame.image.load('assets/presentateur/presentateur0.1.png'),(384*self.pixel[0],216*self.pixel[1])), 
+            pygame.transform.scale(pygame.image.load('assets/presentateur/presentateur0.2.png'),(384*self.pixel[0],216*self.pixel[1])), 
+            pygame.transform.scale(pygame.image.load('assets/presentateur/presentateur0.3.png'),(384*self.pixel[0],216*self.pixel[1])), 
+            pygame.transform.scale(pygame.image.load('assets/presentateur/presentateur0.4.png'),(384*self.pixel[0],216*self.pixel[1]))],
+            "parle":[pygame.transform.scale(pygame.image.load('assets/presentateur/presentateurParle0.png'),(384*self.pixel[0],216*self.pixel[1])),
+            pygame.transform.scale(pygame.image.load('assets/presentateur/presentateurParle1.png'),(384*self.pixel[0],216*self.pixel[1])),
+            pygame.transform.scale(pygame.image.load('assets/presentateur/presentateurParle2.png'),(384*self.pixel[0],216*self.pixel[1])),
+            pygame.transform.scale(pygame.image.load('assets/presentateur/presentateurParle3.png'),(384*self.pixel[0],216*self.pixel[1])),
+            pygame.transform.scale(pygame.image.load('assets/presentateur/presentateurParle4.png'),(384*self.pixel[0],216*self.pixel[1])),
+            pygame.transform.scale(pygame.image.load('assets/presentateur/presentateurParle5.png'),(384*self.pixel[0],216*self.pixel[1])),
+            pygame.transform.scale(pygame.image.load('assets/presentateur/presentateurParle6.png'),(384*self.pixel[0],216*self.pixel[1]))]
+        }
+        self.presentateur.img = self.presentateur.imgOrigin[self.presentateur.phaseAnim][self.presentateur.compteurAnim]
 
         for k in self.lst_obj_question:
             k.pixel = self.pixel
