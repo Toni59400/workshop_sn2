@@ -8,13 +8,16 @@ class Question():
     '''
     def __init__(self, game, screen, question, reponse, propositions, explication):
         self.white = (255,255,0)
-        self.screen = screen 
+        self.screen = screen
         self.question = question #string
         self.reponse = reponse #index dans la liste proposition
         self.propositions = propositions #liste de propositions
         self.explication = explication #string
         self.game = game
         self.pixel = game.pixel
+        self.img_btn = [
+                        pygame.transform.scale(pygame.image.load('asset/'))
+        ]
         self.img = pygame.transform.scale(pygame.image.load('assets/presentateur/bulle.png'),(384*self.pixel[0],216*self.pixel[1]))
         self.reponse1 = pygame.transform.scale(pygame.image.load('assets/presentateur/carreRep.png'), (96*self.pixel[0], 64*self.pixel[1]))
         self.reponse2 = pygame.transform.scale(pygame.image.load('assets/presentateur/carreRep.png'), (96*self.pixel[0], 64*self.pixel[1]))
@@ -59,3 +62,4 @@ class Question():
                 self.explication2 = self.arial_font.render(u, False, self.black)
                 self.screen.blit(self.explication2, [30*self.pixel[0], 25*self.pixel[1]+(10*self.pixel[1])*cpt])
                 cpt+=1
+                
