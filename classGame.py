@@ -54,6 +54,7 @@ class Game:
                 self.updateZoom(self.zoom-5)
             else : 
                 self.phase = "explication"
+                self.presentateur.parle()
         if self.phase == "zoom" : 
             if self.zoom < 100:
                 self.updateZoom(self.zoom+5)
@@ -77,7 +78,7 @@ class Game:
         Dans ce carré se trouve toujours la reponse 1 (rep1) du dictionnaire.
         """
         choix = 1
-        
+
         if self.lst_obj_question[self.n_question].reponse == choix : 
             self.phase = "zoom"
             self.rep = "animBonneRep"

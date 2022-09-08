@@ -9,7 +9,7 @@ class Presentateur:
         self.screen = screen
         self.game = game
         self.pixel = pixel
-        self.phaseAnim = "parle"
+        self.phaseAnim = "attente"
         self.compteurAnim = 0
         self.imgOrigin = {"attente":
             [pygame.transform.scale(pygame.image.load('assets/presentateur/presentateur0.png'),(384*self.pixel[0],216*self.pixel[1])), 
@@ -23,7 +23,9 @@ class Presentateur:
             pygame.transform.scale(pygame.image.load('assets/presentateur/presentateurParle1.png'),(384*self.pixel[0],216*self.pixel[1])),
             pygame.transform.scale(pygame.image.load('assets/presentateur/presentateurParle2.png'),(384*self.pixel[0],216*self.pixel[1])),
             pygame.transform.scale(pygame.image.load('assets/presentateur/presentateurParle3.png'),(384*self.pixel[0],216*self.pixel[1])),
-            pygame.transform.scale(pygame.image.load('assets/presentateur/presentateurParle4.png'),(384*self.pixel[0],216*self.pixel[1]))]
+            pygame.transform.scale(pygame.image.load('assets/presentateur/presentateurParle4.png'),(384*self.pixel[0],216*self.pixel[1])),
+            pygame.transform.scale(pygame.image.load('assets/presentateur/presentateurParle5.png'),(384*self.pixel[0],216*self.pixel[1])),
+            pygame.transform.scale(pygame.image.load('assets/presentateur/presentateurParle6.png'),(384*self.pixel[0],216*self.pixel[1]))]
         }
         self.img = self.imgOrigin[self.phaseAnim][self.compteurAnim]
 
@@ -34,6 +36,10 @@ class Presentateur:
         
         if self.phaseAnim=="attente":
             if self.game.compteur % 10 == 0:
+                if randint(0,20) == 0: #mettre l'animation miroir
+                    self.phaseAnim = "animation0"
+                    self.sensAnim = 1
+                    self.compteurAnim = 0
                 if self.compteurAnim not in [0,1]:
                     self.compteurAnim = 0
                 self.compteurAnim = int(not bool(self.compteurAnim))
@@ -41,7 +47,20 @@ class Presentateur:
                 self.zoom(self.game.zoom)
         elif self.phaseAnim=="parle":
             if self.game.compteur %2 == 0:
-                self.compteurAnim = randint(0,4)
+                self.compteurAnim = randint(0,6)
+                self.img = self.imgOrigin[self.phaseAnim][self.compteurAnim]
+                self.zoom(self.game.zoom)
+        elif self.phaseAnim == "animation0":
+            if self.game.compteur %3 == 0:
+                if self.sensAnim == 1:
+                    self.compteurAnim +=1
+                    if self.compteurAnim == 4:
+                        self.sensAnim = 0
+                else:
+                    self.compteurAnim -= 1
+                    if self.compteurAnim == -1:
+                        self.phaseAnim = "attente"
+                print(self.compteurAnim)
                 self.img = self.imgOrigin[self.phaseAnim][self.compteurAnim]
                 self.zoom(self.game.zoom)
         self.screen.blit(self.img, (self.pixel[0]*192 - self.img.get_width()/2, self.pixel[1]*108 - self.img.get_height()/2 + 40*self.pixel[1]/100*self.game.zoom))
@@ -50,3 +69,6 @@ class Presentateur:
         self.img = pygame.transform.rotozoom(self.imgOrigin[self.phaseAnim][self.compteurAnim],0,1+(n*(2.5/255)))
         if n > 50:
             self.img.set_alpha(255-(n-50)*12.75)
+
+    def parle(self):
+        pass
