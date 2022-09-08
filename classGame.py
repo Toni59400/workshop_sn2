@@ -8,7 +8,10 @@ from classSpectateur import Spectateur
 class Game:
     def __init__(self, screen):
         """
-        screen - pygame.Screen - l'écran sur lequel s'affiche le jeu"""
+        screen - pygame.Screen - l'écran sur lequel s'affiche le jeu
+        """
+        self.bonne_reponse = 0 
+        self.mauvaise_reponse = 0
         self.screen = screen
         self.n_question = 0
         self.pixel = (self.screen.get_width()/384, self.screen.get_height()/216)
@@ -60,7 +63,7 @@ class Game:
                 self.updateZoom(self.zoom+5)
             else : 
                 self.phase = self.rep
-        print(self.phase)
+        
 
         
         
@@ -71,7 +74,8 @@ class Game:
         self.presentateur.update()
 
         self.lst_obj_question[self.n_question].update()
-                
+        pygame.draw.rect(self.screen, (245,10,10), pygame.Rect(self.screen.get_width()/5, 4*self.pixel[1], (self.screen.get_width()/5)*3, 10*self.pixel[1]))
+        pygame.draw.rect(self.screen, (0,255,0), pygame.Rect(self.screen.get_width()/2-10*self.pixel[0]+(3/20*self.screen.get_width())*(self.bonne_reponse-self.mauvaise_reponse), 4*self.pixel[1], 20*self.pixel[0], 10*self.pixel[0]))
     
     def eventCarreGauche(self):
         """
@@ -82,9 +86,11 @@ class Game:
         if self.lst_obj_question[self.n_question].reponse == choix : 
             self.phase = "zoom"
             self.rep = "animBonneRep"
+            self.bonne_reponse+=1
         else:
             self.phase = "zoom"
             self.rep = "animMauvaiseRep"
+            self.mauvaise_reponse+=1
     
     def eventCarreDroite(self):
         """
@@ -94,9 +100,11 @@ class Game:
         if self.lst_obj_question[self.n_question].reponse == choix : 
             self.phase = "zoom"
             self.rep = "animBonneRep"
+            self.bonne_reponse+=1
         else:
             self.phase = "zoom"
             self.rep = "animMauvaiseRep"
+            self.mauvaise_reponse+=1
 
     def eventSuivant(self) : 
         """
