@@ -113,7 +113,7 @@ class Game:
         if self.n_question < len(self.lst_obj_question)-1 : 
             self.n_question+=1
             self.phase = "question"
-
+            self.presentateur.parle()
 
     def resize(self):
         """cette fonction recalcule les dimensions de tout les elements si la taille est modifiée"""

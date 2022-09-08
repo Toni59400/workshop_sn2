@@ -32,10 +32,8 @@ while jeu:
                 game.eventCarreDroite()
         if game.phase == "explication" : 
             if (x<(96+20)*game.pixel[0] and x>48*game.pixel[0]) and (y<(140+48)*game.pixel[1] and y>140*game.pixel[1]) and event.type == pygame.MOUSEBUTTONUP :
-                game.eventSuivant()
+                game.lst_obj_question[game.n_question].timerNext = 3
         if event.type == pygame.QUIT:
             jeu = False
-        if event.type == pygame.KEYDOWN:
-            game.pressed[event.key] = True
-        elif event.type == pygame.KEYUP:
-            game.pressed[event.key] = False
+        
+
