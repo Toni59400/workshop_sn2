@@ -23,11 +23,16 @@ while jeu:
         if event.type == pygame.VIDEORESIZE:
             game.resize()
         #Bouton gauche
-        if (x<(96+20)*game.pixel[0] and x>20*game.pixel[0]) and (y<(140+64)*game.pixel[1] and y>140*game.pixel[1]) and event.type == pygame.MOUSEBUTTONUP :
-            game.eventCarreGauche()
+        if game.phase == "question":
+            if (x<(96+20)*game.pixel[0] and x>20*game.pixel[0]) and (y<(140+64)*game.pixel[1] and y>140*game.pixel[1]) and event.type == pygame.MOUSEBUTTONUP :
+                game.eventCarreGauche()
         #Bouton droite
-        if (x<(96+140)*game.pixel[0] and x>140*game.pixel[0]) and (y<(140+64)*game.pixel[1] and y>140*game.pixel[1]) and event.type == pygame.MOUSEBUTTONUP :
-            game.eventCarreDroite()
+        if game.phase == "question":
+            if (x<(96+140)*game.pixel[0] and x>140*game.pixel[0]) and (y<(140+64)*game.pixel[1] and y>140*game.pixel[1]) and event.type == pygame.MOUSEBUTTONUP :
+                game.eventCarreDroite()
+        if game.phase == "explication" : 
+            if (x<(96+20)*game.pixel[0] and x>48*game.pixel[0]) and (y<(140+48)*game.pixel[1] and y>140*game.pixel[1]) and event.type == pygame.MOUSEBUTTONUP :
+                game.lst_obj_question[game.n_question].timerNext = 3
         if event.type == pygame.QUIT:
             jeu = False
         

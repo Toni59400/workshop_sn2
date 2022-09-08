@@ -8,8 +8,9 @@ class Presentateur:
                 pixel - tuple - la dimension d'un pixel (largeur, hauteur)"""
         self.screen = screen
         self.game = game
+        self.timerParle = 30
         self.pixel = pixel
-        self.phaseAnim = "attente"
+        self.phaseAnim = "parle"
         self.compteurAnim = 0
         self.imgOrigin = {"attente":
             [pygame.transform.scale(pygame.image.load('assets/presentateur/presentateur0.png'),(384*self.pixel[0],216*self.pixel[1])), 
@@ -48,8 +49,14 @@ class Presentateur:
         elif self.phaseAnim=="parle":
             if self.game.compteur %2 == 0:
                 self.compteurAnim = randint(0,6)
+                print(self.compteurAnim)
+                print(len(self.imgOrigin[self.phaseAnim]))
                 self.img = self.imgOrigin[self.phaseAnim][self.compteurAnim]
                 self.zoom(self.game.zoom)
+            self.timerParle -= 1
+            if self.timerParle == 0:
+                self.phaseAnim = "attente"
+                self.compteurAnim = 0
         elif self.phaseAnim == "animation0":
             if self.game.compteur %3 == 0:
                 if self.sensAnim == 1:
@@ -60,15 +67,18 @@ class Presentateur:
                     self.compteurAnim -= 1
                     if self.compteurAnim == -1:
                         self.phaseAnim = "attente"
+                        self.compteurAnim = 0
                 print(self.compteurAnim)
                 self.img = self.imgOrigin[self.phaseAnim][self.compteurAnim]
                 self.zoom(self.game.zoom)
         self.screen.blit(self.img, (self.pixel[0]*192 - self.img.get_width()/2, self.pixel[1]*108 - self.img.get_height()/2 + 40*self.pixel[1]/100*self.game.zoom))
         
     def zoom(self, n):
+        print(self.phaseAnim, self.compteurAnim)
         self.img = pygame.transform.rotozoom(self.imgOrigin[self.phaseAnim][self.compteurAnim],0,1+(n*(2.5/255)))
         if n > 50:
             self.img.set_alpha(255-(n-50)*12.75)
 
     def parle(self):
-        pass
+        self.timerParle = 30
+        self.phaseAnim = 'parle'
